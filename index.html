@@ -1,0 +1,81 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Migration Mission – 5th Class EVS</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Telugu",sans-serif;background:#eefaf5;color:#17332c}
+.app{max-width:850px;margin:auto;padding:12px}header,.card{background:#fff;border-radius:20px;padding:18px;margin:12px 0;box-shadow:0 4px 18px #0001}
+header{background:#075e54;color:white;text-align:center}h1{margin:0 0 6px;font-size:clamp(25px,7vw,40px)}h2{color:#075e54}
+.btn,.choice{border:0;border-radius:13px;padding:12px 15px;margin:5px;cursor:pointer;font-weight:700}.btn{background:#087f5b;color:white}.choice{display:block;width:calc(100% - 10px);text-align:left;background:#fff;border:2px solid #d5e4df}
+.controls{text-align:center}.hidden{display:none!important}.item{padding:13px;margin:9px 0;border:2px solid #d9e8e3;border-radius:14px;background:#fafffd}
+.feedback{text-align:center;font-weight:700;min-height:28px}.stats{display:flex;justify-content:space-between}.progress{height:11px;background:#dce7e3;border-radius:20px;overflow:hidden;margin-top:10px}.bar{height:100%;width:0;background:#12b886}
+#startOverlay{position:fixed;inset:0;background:#075e54ee;z-index:9;display:flex;align-items:center;justify-content:center;padding:20px}.startbox{background:white;border-radius:24px;padding:28px;text-align:center;max-width:500px;width:100%}
+.big{font-size:55px}.small{font-size:13px;line-height:1.5;color:#52615d}.sortgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:600px){.sortgrid{grid-template-columns:1fr}}
+</style></head><body>
+<div id="startOverlay"><div class="startbox"><div class="big">🚀🌍</div><h1>Migration Mission</h1><h2>వలస ప్రయాణం</h2><p>5th Class EVS • English + తెలుగు</p><p class="small">Tap START once. This user action allows supported phone browsers to use voice.</p><button class="btn" style="width:100%;font-size:19px" id="startBtn">▶ START GAME / గేమ్ ప్రారంభించు</button></div></div>
+<div class="app">
+<header><h1>🚀 Migration Mission</h1><div>Positive & Negative Effects<br>అనుకూల & ప్రతికూల ప్రభావాలు</div><div class="small" style="color:white;margin-top:8px">T N Sivaji • SGT • M P P School M Singupuram • Parvathipuram Manyam</div>
+<div class="controls"><button class="btn" id="voiceBtn">🔊 Voice ON</button><button class="btn" id="soundBtn">🎵 Sound ON</button></div></header>
+<div class="card"><div class="stats"><b>⭐ Score: <span id="score">0</span></b><b>🏆 Stars: <span id="stars">0</span></b></div><div class="progress"><div class="bar" id="bar"></div></div></div>
+
+<section id="learn" class="card"><h2>📚 Learn / నేర్చుకో</h2>
+<div class="item"><b>Migration / వలస</b> means people moving from one place to another to live or work.<br>వలస అంటే ప్రజలు జీవించడానికి లేదా పని చేయడానికి ఒక ప్రదేశం నుంచి మరొక ప్రదేశానికి వెళ్లడం.</div>
+<div class="item">💼 Better jobs & livelihood<br>మెరుగైన ఉద్యోగాలు మరియు జీవనోపాధి</div>
+<div class="item">🏫 Better schools, colleges & health care<br>మెరుగైన పాఠశాలలు, కళాశాలలు మరియు ఆరోగ్య సేవలు</div>
+<div class="item">🗣️ New languages & cultures<br>కొత్త భాషలు మరియు సంస్కృతులు</div>
+<div class="item">💰 Improved family financial status<br>కుటుంబ ఆర్థిక స్థితి మెరుగుపడటం</div>
+<div class="item">🏙️ Cities may become crowded and polluted<br>నగరాలు రద్దీగా మరియు కాలుష్యంగా మారవచ్చు</div>
+<div class="item">💼 Jobs may be harder to find when too many people move to one place<br>చాలా మంది ఒకే చోటికి వస్తే ఉద్యోగాలు దొరకడం కష్టమవచ్చు</div>
+<div class="item">🏠 Housing, transport and food may become expensive<br>ఇళ్లు, రవాణా మరియు ఆహారం ఖరీదవవచ్చు</div>
+<div class="item">🏡 Villages may lose skilled and educated people<br>గ్రామాలు నైపుణ్యం మరియు విద్య కలిగిన ప్రజలను కోల్పోవచ్చు</div>
+<button class="btn" id="toSort">NEXT ▶</button></section>
+
+<section id="sort" class="card hidden"><h2>🧩 Sort / వర్గీకరించు</h2><p>Choose the correct box. / సరైన పెట్టెను ఎంచుకోండి.</p><div id="sortItem" class="item"></div><div class="sortgrid"><button class="btn" id="positive">✅ POSITIVE / అనుకూల</button><button class="btn" style="background:#e67700" id="negative">⚠️ NEGATIVE / ప్రతికూల</button></div><div class="feedback" id="sortFb"></div></section>
+
+<section id="match" class="card hidden"><h2>🔗 Match / జతపరచు</h2><div id="matchArea"></div><div class="feedback" id="matchFb"></div></section>
+<section id="quiz" class="card hidden"><h2>🧠 Bilingual Quiz / ద్విభాషా క్విజ్</h2><div id="quizArea"></div><div class="feedback" id="quizFb"></div></section>
+<section id="final" class="card" style="display:none;text-align:center"><div class="big">🏆🎉🌟</div><h2>Mission Complete! / మిషన్ పూర్తయింది!</h2><div id="finalText"></div><button class="btn" onclick="location.reload()">🔄 PLAY AGAIN / మళ్లీ ఆడండి</button></section>
+</div>
+
+<script>
+const sortData=[
+["Better jobs and better livelihood","మెరుగైన ఉద్యోగాలు మరియు జీవనోపాధి","p"],
+["Better schools, colleges and health care","మెరుగైన పాఠశాలలు, కళాశాలలు మరియు ఆరోగ్య సేవలు","p"],
+["Learning new languages and cultures","కొత్త భాషలు మరియు సంస్కృతులను నేర్చుకోవడం","p"],
+["Improved family financial status","కుటుంబ ఆర్థిక స్థితి మెరుగుపడటం","p"],
+["Cities may become crowded and polluted","నగరాలు రద్దీగా మరియు కాలుష్యంగా మారవచ్చు","n"],
+["Harder to find jobs when too many people move to the same place","చాలా మంది ఒకే చోటికి వస్తే ఉద్యోగాలు దొరకడం కష్టం","n"],
+["Housing, transport and food may become expensive","ఇళ్లు, రవాణా మరియు ఆహారం ఖరీదవవచ్చు","n"],
+["Villages may lose skilled and educated people","గ్రామాలు నైపుణ్యం మరియు విద్య కలిగిన ప్రజలను కోల్పోవచ్చు","n"]];
+const matches=[["Better jobs","Better livelihood"],["New languages","Learning new cultures"],["Crowding and pollution","Unhealthy living conditions"],["Many people in one place","Jobs may be harder to find"]];
+const quiz=[
+["What is migration? / వలస అంటే ఏమిటి?",["Moving from one place to another to live or work / జీవించడానికి లేదా పని చేయడానికి ఒక చోటు నుంచి మరొక చోటుకు వెళ్లడం","Staying in the same place forever / ఎప్పటికీ ఒకే చోట ఉండటం"],0],
+["Which is a positive effect? / అనుకూల ప్రభావం ఏది?",["Better jobs / మెరుగైన ఉద్యోగాలు","More pollution / ఎక్కువ కాలుష్యం"],0],
+["What may happen when cities become too crowded? / నగరాలు చాలా రద్దీగా మారితే ఏమవచ్చు?",["Unhealthy living conditions / అనారోగ్యకరమైన జీవన పరిస్థితులు","More empty houses / మరిన్ని ఖాళీ ఇళ్లు"],0],
+["What may become expensive? / ఏవి ఖరీదవవచ్చు?",["Housing, transport and food / ఇళ్లు, రవాణా మరియు ఆహారం","Only school bags / పాఠశాల బ్యాగులు మాత్రమే"],0],
+["What can migrants learn? / వలస వెళ్లిన వారు ఏమి నేర్చుకోవచ్చు?",["New languages and cultures / కొత్త భాషలు మరియు సంస్కృతులు","Only one old lesson / పాత పాఠం మాత్రమే"],0]];
+let score=0,stars=0,si=0,mi=0,qi=0,voiceOn=true,soundOn=true,started=false;
+const $=x=>document.getElementById(x);
+function progress(){let done=si+mi+qi,total=sortData.length+matches.length+quiz.length;$("bar").style.width=(done/total*100)+"%"}
+function add(n){score+=n;stars=Math.floor(score/20);$("score").textContent=score;$("stars").textContent=stars;progress()}
+function show(id){document.querySelectorAll("section").forEach(x=>x.classList.add("hidden"));$(id).classList.remove("hidden");progress()}
+const synth=window.speechSynthesis;
+function getVoice(lang){let vs=synth?synth.getVoices():[];let p=lang=="te-IN"?["te-in","te"]:["en-in","en-gb","en-us","en"];return vs.find(v=>p.some(x=>v.lang.toLowerCase().startsWith(x)))||null}
+function say(text,lang,done){if(!voiceOn||!synth||!started)return;let u=new SpeechSynthesisUtterance(text);u.lang=lang;let v=getVoice(lang);if(v)u.voice=v;u.rate=.9;u.pitch=1.03;u.onend=()=>done&&done();synth.speak(u)}
+function bilingual(en,te){if(!voiceOn||!synth||!started)return;synth.cancel();say(en,"en-IN",()=>setTimeout(()=>say(te,"te-IN"),180))}
+function tone(f,d=.12){if(!soundOn)return;try{let C=AudioContext||webkitAudioContext,c=new C,o=c.createOscillator,g=c.createGain;o.frequency.value=f;o.connect(g);g.connect(c.destination);g.gain.value=.05;o.start();o.stop(c.currentTime+d)}catch(e){}}
+function good(){tone(880);setTimeout(()=>tone(1175,.15),100);bilingual("Excellent! That's correct!","చాలా బాగా చెప్పారు! ఇది సరైన సమాధానం!")}
+function bad(){tone(180,.2);bilingual("Oops! Try again!","పర్లేదు! మరోసారి ప్రయత్నించండి!")}
+function done(){tone(660);setTimeout(()=>tone(880),120);setTimeout(()=>tone(1100,.18),240);bilingual("Very good! You completed this challenge!","చాలా బాగుంది! మీరు ఈ ఛాలెంజ్‌ను పూర్తి చేశారు!")}
+$("startBtn").onclick=()=>{started=true;$("startOverlay").classList.add("hidden");bilingual("Welcome to Migration Mission! Let's learn and play!","మైగ్రేషన్ మిషన్‌కు స్వాగతం! నేర్చుకుందాం, ఆడుకుందాం!")};
+$("voiceBtn").onclick=()=>{voiceOn=!voiceOn;$("voiceBtn").textContent=voiceOn?"🔊 Voice ON":"🔇 Voice OFF";if(!voiceOn&&synth)synth.cancel();else bilingual("Voice is on!","వాయిస్ ఆన్‌లో ఉంది!")};
+$("soundBtn").onclick=()=>{soundOn=!soundOn;$("soundBtn").textContent=soundOn?"🎵 Sound ON":"🔇 Sound OFF";if(soundOn)tone(700)};
+$("toSort").onclick=()=>{show("sort");renderSort();bilingual("Sort the effects into positive and negative.","అనుకూల మరియు ప్రతికూల ప్రభావాలను వర్గీకరించండి.")};
+function renderSort(){if(si>=sortData.length){show("match");renderMatch();done();return}let x=sortData[si];$("sortItem").innerHTML="<b>"+x[0]+"</b><br><span class='small'>"+x[1]+"</span>"}
+function answer(t){let x=sortData[si];if(x[2]==t){si++;add(10);good();setTimeout(renderSort,650)}else bad()}
+$("positive").onclick=()=>answer("p");$("negative").onclick=()=>answer("n");
+function renderMatch(){if(mi>=matches.length){show("quiz");renderQuiz();done();return}let x=matches[mi];let opts=[x[1],matches[(mi+1)%matches.length][1]];$("matchArea").innerHTML="<div class='item'><b>"+x[0]+"</b></div>"+opts.map((o,i)=>"<button class='choice' onclick='manswer("+i+")'>"+o+"</button>").join("")}
+function manswer(i){if(i==0){mi++;add(10);good();setTimeout(renderMatch,650)}else bad()}
+function renderQuiz(){if(qi>=quiz.length){finish();return}let q=quiz[qi];$("quizArea").innerHTML="<div class='item'><b>"+q[0]+"</b></div>"+q[1].map((a,i)=>"<button class='choice' onclick='qanswer("+i+")'>"+a+"</button>").join("")}
+function qanswer(i){if(i==quiz[qi][2]){qi++;add(10);good();setTimeout(renderQuiz,650)}else bad()}
+function finish(){show("final");$("finalText").innerHTML="<h3>Your Score / మీ స్కోర్: "+score+"</h3><h3>⭐ Stars: "+stars+"</h3><p>Congratulations! You completed the Migration Mission.<br>అభినందనలు! మీరు Migration Mission ను పూర్తి చేశారు!</p>";setTimeout(()=>bilingual("Congratulations! You completed the game!","అభినందనలు! మీరు గేమ్‌ను విజయవంతంగా పూర్తి చేశారు!"),350)}
+</script></body></html>
